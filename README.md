@@ -28,7 +28,7 @@ Este comando criará uma imagem Docker chamada `pedidoapi` com a tag `latest`.
 Após a imagem ser criada, execute o seguinte comando para iniciar um container com a API:
 
 ```bash
-docker run -d -p 8080:8080 --name pedidoapi pedidoapi:latest
+docker run -d -p 8080:8080  pedidoapi:latest
 ```
 
 Esse comando executa a aplicação em um container Docker e a expõe na porta `8080`.
