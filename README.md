@@ -1,6 +1,4 @@
-# Documentação para Execução da API de Pedidos
-
-
+# API RESTful de pedidos
 
 ## Passo a Passo para Execução Local
 
@@ -20,44 +18,21 @@ Para construir a imagem Docker da aplicação, você deve garantir que o Docker 
 Dentro da raiz do projeto, execute o seguinte comando para criar a imagem Docker:
 
 ```bash
-docker build -t pedido-api:latest .
+docker build -t pedidoapi:latest .
 ```
 
-Este comando criará uma imagem Docker chamada `pedido-api` com a tag `latest`.
+Este comando criará uma imagem Docker chamada `pedidoapi` com a tag `latest`.
 
 ### 3. Executar a API usando Docker
 
 Após a imagem ser criada, execute o seguinte comando para iniciar um container com a API:
 
 ```bash
-docker run -d -p 8080:8080 --name pedido-api pedido-api:latest
+docker run -d -p 8080:8080 --name pedido-api pedidoapi:latest
 ```
 
 Esse comando executa a aplicação em um container Docker e a expõe na porta `8080`.
 
-Você pode verificar se o container está em execução com o seguinte comando:
-
-```bash
-docker ps
-```
-
-Para ver os logs da aplicação, execute:
-
-```bash
-docker logs pedido-api
-```
-
-Se precisar parar o container:
-
-```bash
-docker stop pedido-api
-```
-
-Se precisar remover o container:
-
-```bash
-docker rm pedido-api
-```
 
 ## Consumo da API com Postman
 
@@ -91,19 +66,16 @@ Após importar a coleção, você poderá executar os cenários de teste diretam
 ## Execução da API usando Docker Hub
 
 ### 1. Puxar a Imagem do Docker Hub
-
-Caso a imagem Docker da API esteja publicada no Docker Hub, use o seguinte comando para baixá-la:
-
-```bash
-docker pull seu-usuario/pedido-api:latest
+```
+docker pull sbveras0ufes/pedidoapi:0.1
 ```
 
 ### 2. Iniciar o Container da API
 
 Após puxar a imagem do Docker Hub, execute o seguinte comando para iniciar o container:
 
-```bash
-docker run -d -p 8080:8080 --name pedido-api seu-usuario/pedido-api:latest
+```
+docker run -d -p 8080:8080 sbveras0ufes/pedidoapi:0.1
 ```
 
 A API estará disponível em `http://localhost:8080`. Agora, você pode consumir a API usando Postman ou qualquer outra ferramenta de sua preferência.
