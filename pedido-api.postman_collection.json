@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "ca34c9ef-edda-4dfa-ab0a-976969844bf6",
+		"name": "clayton",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "36849878"
+	},
+	"item": [
+		{
+			"name": "Cadastro de usuário",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; charset=utf-8",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"João\",\r\n    \"tipo\": \"Prata\",\r\n    \"fidelidade\": 50.0,\r\n    \"logradouro\": \"Rua A\",\r\n    \"bairro\": \"Centro\",\r\n    \"cidade\": \"Vitória\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/clientes"
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Pedido por id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; charset=utf-8",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": \"2024-09-28T00:00:00\",\r\n    \"itens\": [\r\n        {\r\n            \"nome\": \"Pizza\",\r\n            \"quantidade\": 1,\r\n            \"valorUnitario\": 20.0,\r\n            \"tipo\": \"Alimentação\"\r\n        },\r\n        {\r\n            \"nome\": \"Livro\",\r\n            \"quantidade\": 2,\r\n            \"valorUnitario\": 50.0,\r\n            \"tipo\": \"Educação\"\r\n        }\r\n    ],\r\n    \"cupons\": [\r\n        {\r\n            \"nomeMetodo\": \"DESCONTO10\",\r\n            \"valorDesconto\": 10.0\r\n        }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/pedidos?clienteId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pedidos"
+					],
+					"query": [
+						{
+							"key": "clienteId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Processar Desconto",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; charset=utf-8",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": \"2024-09-28T00:00:00\",\r\n    \"itens\": [\r\n        {\r\n            \"nome\": \"Pizza\",\r\n            \"quantidade\": 1,\r\n            \"valorUnitario\": 20.0,\r\n            \"tipo\": \"Alimentação\"\r\n        },\r\n        {\r\n            \"nome\": \"Livro\",\r\n            \"quantidade\": 2,\r\n            \"valorUnitario\": 50.0,\r\n            \"tipo\": \"Educação\"\r\n        }\r\n    ],\r\n    \"cupons\": [\r\n        {\r\n            \"nomeMetodo\": \"DESCONTO10\",\r\n            \"valorDesconto\": 10.0\r\n        }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/pedidos?clienteId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pedidos"
+					],
+					"query": [
+						{
+							"key": "clienteId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Realizar Pedido",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json; charset=utf-8",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": \"2024-09-28T00:00:00\",\r\n    \"itens\": [\r\n        {\r\n            \"nome\": \"Pizza\",\r\n            \"quantidade\": 1,\r\n            \"valorUnitario\": 20.0,\r\n            \"tipo\": \"Alimentação\"\r\n        },\r\n        {\r\n            \"nome\": \"Livro\",\r\n            \"quantidade\": 2,\r\n            \"valorUnitario\": 50.0,\r\n            \"tipo\": \"Educação\"\r\n        }\r\n    ],\r\n    \"cupons\": [\r\n        {\r\n            \"nomeMetodo\": \"DESCONTO10\",\r\n            \"valorDesconto\": 10.0\r\n        }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/pedidos?clienteId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pedidos"
+					],
+					"query": [
+						{
+							"key": "clienteId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
