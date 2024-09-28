@@ -17,6 +17,11 @@ public class CupomDescontoEntrega {
         this.nomeMetodo = nomeMetodo;
         this.valorDesconto = valorDesconto;
     }
+    
+
+    public CupomDescontoEntrega() {
+    }
+
 
     public double getValorDesconto() {
         return valorDesconto;

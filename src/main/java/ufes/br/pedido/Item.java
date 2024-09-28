@@ -1,5 +1,6 @@
 package ufes.br.pedido;
 
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -13,12 +14,12 @@ import jakarta.persistence.ManyToOne;
  * @author clayton
  */
 
-@Entity
+@Embeddable 
 public class Item {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   
 
     private Long id;
+
     public String getNome() {
         return nome;
     }
@@ -31,17 +32,9 @@ public class Item {
         return valorUnitario;
     }
 
-    public Pedido getPedido() {
-        return pedido;
-    }
 
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+    public Item() {
     }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pedido_id")
-    private Pedido pedido;
 
     private String nome;
     private int quantidade;
@@ -49,12 +42,12 @@ public class Item {
     private String tipo;
 
     
-    public Item(String nome, int quantidade, double valorUnitario, String tipo) {
-        this.nome = nome;
-        this.quantidade = quantidade;
-        this.valorUnitario = valorUnitario;
-        this.tipo = tipo;
-    }
+    // public Item(String nome, int quantidade, double valorUnitario, String tipo) {
+    //     this.nome = nome;
+    //     this.quantidade = quantidade;
+    //     this.valorUnitario = valorUnitario;
+    //     this.tipo = tipo;
+    // }
 
     public double getValorTotal() {
         return quantidade * valorUnitario;

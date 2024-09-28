@@ -8,14 +8,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Pedido {
@@ -29,31 +27,28 @@ public class Pedido {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @ManyToOne
     private Cliente cliente;
     private final double taxaEntrega = 10.00;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @ElementCollection
     private List<Item> itens;
     
     public Pedido() {
-        this.itens = new ArrayList<>();
+        
         this.cuponsDescontoEntrega = new ArrayList<>();
     }
 
     @ElementCollection
     private List<CupomDescontoEntrega> cuponsDescontoEntrega;
 
-    public Pedido(LocalDate data, Cliente cliente) {
-        this.data = data;
-        this.cliente = cliente;
-        this.itens = new ArrayList<>();
-        this.cuponsDescontoEntrega = new ArrayList<>();
-    }
+    // public Pedido(LocalDate data, Cliente cliente) {
+    //     this.data = data;
+    //     this.cliente = cliente;
+    //     this.itens = new ArrayList<>();
+    //     this.cuponsDescontoEntrega = new ArrayList<>();
+    // }
 
     public void adicionarItem(Item item) {
         itens.add(item);
@@ -68,7 +63,7 @@ public class Pedido {
         for (Item item : itens) {
             valorTotal += item.getValorTotal();
         }
-        return valorTotal;
+        return (valorTotal - getDescontoConcedido());
     }
 
     public Cliente getCliente() {
@@ -116,6 +111,10 @@ public class Pedido {
         sb.append(", cuponsDescontoEntrega=").append(cuponsDescontoEntrega);
         sb.append('}');
         return sb.toString();
+    }
+
+    public LocalDate getData() {
+        return data;
     }
 
 }
