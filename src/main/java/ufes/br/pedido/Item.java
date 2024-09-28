@@ -1,13 +1,6 @@
 package ufes.br.pedido;
 
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 /**
  *
@@ -17,8 +10,6 @@ import jakarta.persistence.ManyToOne;
 @Embeddable 
 public class Item {
    
-
-    private Long id;
 
     public String getNome() {
         return nome;
@@ -42,12 +33,7 @@ public class Item {
     private String tipo;
 
     
-    // public Item(String nome, int quantidade, double valorUnitario, String tipo) {
-    //     this.nome = nome;
-    //     this.quantidade = quantidade;
-    //     this.valorUnitario = valorUnitario;
-    //     this.tipo = tipo;
-    // }
+ 
 
     public double getValorTotal() {
         return quantidade * valorUnitario;
