@@ -1,6 +1,8 @@
 package ufes.br.pedido.controller;
 
+import java.time.LocalDate;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ufes.br.pedido.Cliente;
+import ufes.br.pedido.Item;
 import ufes.br.pedido.Pedido;
 import ufes.br.pedido.repository.ClienteRepository;
 import ufes.br.pedido.repository.PedidoRepository;
@@ -33,11 +35,23 @@ public class PedidoController {
     @Autowired
     private CalculadoraDescontoService calculadoraDescontoService;
 
-    @PostMapping
-    public ResponseEntity<Map<String, Object>> criarPedido(@RequestBody Pedido pedido, @RequestParam Long clienteId) {
-        Cliente cliente = clienteRepository.findById(clienteId)
+    @PostMapping("")
+    public ResponseEntity<Map<String, Object>> criarPedido(@RequestBody Map<String, Object> requestBody) {
+        Cliente cliente = clienteRepository.findById(((Number) requestBody.get("clienteId")).longValue())
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
-        pedido.setCliente(cliente);
+        
+                var pedido =new Pedido(LocalDate.parse((String) requestBody.get("data")), cliente);
+
+                @SuppressWarnings("unchecked")
+                List<Map<String, Object>> itens = (List<Map<String, Object>>) requestBody.get("itens");
+
+                if (itens != null) {
+                    for (Map<String, Object> itemData : itens) {
+                       pedido.adicionarItem(new Item((String) itemData.get("nome"),((Number) itemData.get("quantidade")).intValue(), ((Number) itemData.get("valorUnitario")).doubleValue(), (String) itemData.get("tipo"))); 
+                    }
+                }
+                
+                
         pedidoRepository.save(pedido);
         Map<String, Object> response = new LinkedHashMap<>();
         response.put("status", "Pedido realizado");
@@ -47,8 +61,9 @@ public class PedidoController {
         response.put("taxa de entrega",pedido.getTaxaEntrega());
         response.put("Valor",pedido.getValorPedido());
         
-
+        
         return ResponseEntity.ok(response);
+                       
     }
 
     @PostMapping("/{pedidoId}/processar-descontos")

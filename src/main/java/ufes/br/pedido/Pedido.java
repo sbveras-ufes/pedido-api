@@ -28,6 +28,15 @@ public class Pedido {
     }
 
 
+    public Pedido(LocalDate data, Cliente cliente) {
+        this.data = data;
+        this.cliente = cliente;
+        itens= new ArrayList<>();
+        this.cuponsDescontoEntrega = new ArrayList<>();
+        
+    }
+
+
     @ManyToOne
     private Cliente cliente;
     private final double taxaEntrega = 10.00;
